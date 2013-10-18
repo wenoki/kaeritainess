@@ -1,0 +1,144 @@
+doctype html
+html
+  head
+    meta charset= "utf-8"
+    title
+      | 帰りたいにゃん
+    script src= "http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+    script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
+    link rel= "stylesheet" href= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+    link rel= "stylesheet" href= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"
+    sass:
+      $lightgreen: #b2d1c4
+      $red: #d25364
+      body
+        > #main
+          min-height: 240px
+          margin: 0
+          padding: 75px 50px 25px
+          background:
+            color: $lightgreen
+            image: url("/1_top.png")
+            size: 380px
+            repeat: no-repeat
+            position: 100px bottom
+          color: white
+          p
+            a
+              &:link, &:visited, &:hover, &:active
+                color: darken($lightgreen, 30%)
+          > .container
+            padding-left: 360px
+        > #count
+          height: 150px
+          padding: 0
+          background:
+            color: $red
+            image: url("/1_bottom.png")
+            size: 380px
+            repeat: no-repeat
+            position: 100px top
+          text-align: right
+          color: white
+        #weekly
+          ul
+            color: #777
+            .saturday
+              color: #428bca
+            .sunday
+              color: #d9534f
+            .monday
+              color: black
+        footer
+          ul
+            margin: 0
+            padding: 0
+            li
+              display: inline-block
+              margin: 0 0.5em
+              color: #ccc
+              a
+                color: inherit
+    coffee:
+      $(document).ready ->
+  body
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand href= "/"
+            span.glyphicon.glyphicon-home
+            |  帰りたいにゃん
+        .navbar-collapse.collapse
+          .navbar-nav.navbar-right
+            - if authenticated?
+              p.navbar-text
+                ' Signed in as
+                a href= "https://twitter.com/#{current_user_nickname}"
+                  = "@#{current_user_nickname}"
+              a.btn.btn-info.navbar-btn href= "/signout"
+                | Sign out
+            - else
+              a.btn.btn-info.navbar-btn href= "/signin"
+                | Sign in with Twitter
+    #main.jumbotron
+      .container
+        == yield
+    #count.jumbotron
+      .container
+        h1
+          = Kaeritai.count.with_delimiter
+        p
+          | これまで帰りたかった回数
+    .container
+      .row
+        #about.col-lg-4
+          h2
+            | なにこれ
+          p
+            | 帰りたい人による帰りたい人のための帰りたいWebサービスです。
+          p
+            - if authenticated?
+              | Twitterでログイン（もうしてます）
+            - else
+              a href= "/signin"
+                | Twitterでログイン
+            | して、「帰りたい」ボタンを押すと
+            a href= "https://twitter.com/kaeritainess"
+              | 帰りたいにゃん
+            | があなたの代わりにその想いをつぶやきます。
+          p
+            | それだけです！
+        #recent.col-lg-4
+          h2
+            | 最近の
+          ul.list-group
+            - Kaeritai.each_with_index do |kaeritai, i|
+              - break if i == 8
+              li.list-group-item
+                a href= "/kaeritai/#{kaeritai.serial}"
+                  = kaeritai.serial.with_delimiter
+                  ' 回目 -
+                  = kaeritai.created_at.strftime "%Y/%m/%d %H:%M:%S"
+        #weekly.col-lg-4
+          h2
+            | 週間帰りたみ
+          ul.list-group
+            - 8.times do |i|
+              - day = Date.today - i
+              li.list-group-item class= day.strftime("%A").downcase
+                = day.strftime "%Y/%m/%d (%a)"
+                span.badge
+                  = Kaeritai.by_day(day).count.with_delimiter
+      hr
+      footer
+        ul
+          li
+            span.glyphicon.glyphicon-home
+            |  Kaeritainess
+          li
+            a href= "https://github.com/wenoki/kaeritainess"
+              | Source on GitHub
+          li
+            ' Illustration by
+            a href= "https://twitter.com/underscape"
+              | @underscape

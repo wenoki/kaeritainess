@@ -8,3 +8,8 @@ gem "sass"
 gem "coffee-script"
 gem "therubyracer", platforms: :ruby
 gem "activesupport"
+gem "randexp"
+gem "omniauth-twitter"
+gem "mongoid", git: "https://github.com/mongoid/mongoid.git"
+gem "bson_ext"
+gem "twitter"

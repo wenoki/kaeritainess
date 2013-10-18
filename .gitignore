@@ -27,3 +27,5 @@ Icon
 
 # Thumbnails
 ._*
+
+/run.sh

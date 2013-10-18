@@ -1,0 +1,55 @@
+:nyan:
+  - :weight: 100
+    :pattern: "にゃん"
+  - :weight: 25
+    :pattern: "にゃ"
+  - :weight: 10
+    :pattern: "にゃー{1,5}ん?"
+  - :weight: 10
+    :pattern: "にゃ〜{1,5}ん?"
+  - :weight: 3
+    :pattern: "にゃー{1,30}ん?"
+  - :weight: 3
+    :pattern: "にゃ〜{1,30}ん?"
+  - :weight: 20
+    :pattern: "ニャン?"
+  - :weight: 5
+    :pattern: "ニャー{1,5}ン?"
+  - :weight: 5
+    :pattern: "ニャ〜{1,5}ン?"
+  - :weight: 2
+    :pattern: "ニャー{1,30}ン?"
+  - :weight: 2
+    :pattern: "ニャ〜{1,30}ン?"
+  - :weight: 10
+    :pattern: "ん?ですが?"
+  - :weight: 8
+    :pattern: "(よ|ょ)(う|ぅ|お|ぉ)"
+  - :weight: 5
+    :pattern: ""
+:postfix:
+  - :weight: 100
+    :pattern: ""
+  - :weight: 25
+    :pattern: "！{1,2}"
+  - :weight: 13
+    :pattern: "…{1,2}"
+  - :weight: 10
+    :pattern: "！{1,5}"
+  - :weight: 10
+    :pattern: "。"
+  - :weight: 5
+    :pattern: "、"
+  - :weight: 8
+    :pattern: "？{1,5}"
+  - :weight: 5
+    :pattern: "！{1,40}"
+  - :weight: 5
+    :pattern: "(！|？){1,10}"
+  - :weight: 3
+    :pattern: "(！|？){1,50}"
+  - :weight: 3
+    :pattern: "…{1,10}"
+  - :weight: 3
+    :pattern: "♡"
+

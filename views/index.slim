@@ -1,18 +1,18 @@
-doctype html
-html
-  head
-    meta charset= "utf-8"
-    title
-      | Kaeritainess
-    script src= "http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
-    script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
-    link rel= "stylesheet" href= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-    link rel= "stylesheet" href= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"
-    sass:
-      body
-        margin: 0
-        padding: 0
-    coffee:
-      $(document).ready ->
-  body
-    header
+- if authenticated?
+  h1
+    form action= "/create" method= "post"
+      button.btn.btn-lg.btn-success type= "submit"
+        span.glyphicon.glyphicon-home
+        |  帰りたい
+  p
+    | ボタンを押すと、
+    a href= "https://twitter.com/kaeritainess"
+      | 帰りたいにゃん
+    | が帰りたがります。
+- else
+  h1
+    | 帰りたい。
+  p
+    a href= "https://twitter.com/kaeritainess"
+      | 帰りたいにゃん
+    | は、あなたの代わりにその想いをつぶやきます。

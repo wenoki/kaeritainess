@@ -1,0 +1,6 @@
+blockquote.twitter-tweet
+  p = "#{@kaeritai.text} (#{@kaeritai.serial.with_delimiter}回目)"
+  ' &mdash; 帰りたいにゃん (@kaeritainess)
+  a href= "https://twitter.com/kaeritainess/statuses/#{@kaeritai.tweet_id}"
+    = @kaeritai.created_at.strftime "%Y/%m/%d %H:%M:%S"
+script async= true src= "//platform.twitter.com/widgets.js" charset="utf-8"
