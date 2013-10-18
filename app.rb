@@ -135,8 +135,12 @@ class Kaeritainess < Sinatra::Base
   end
 
   get "/kaeritai/:serial" do
-    @kaeritai = Kaeritai.find_by serial: params[:serial]
-    slim :show
+    begin
+      @kaeritai = Kaeritai.find_by serial: params[:serial]
+      slim :show
+    rescue
+      redirect to "/failure"
+    end
   end
 
   get "/auth/twitter/callback" do
@@ -148,5 +152,9 @@ class Kaeritainess < Sinatra::Base
 
   get "/auth/failure" do
     redirect to "/failure"
+  end
+
+  get "/failure" do
+    slim :failure
   end
 end
