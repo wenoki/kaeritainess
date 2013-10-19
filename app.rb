@@ -50,8 +50,8 @@ class Kaeritai
   end
 
   def kaeritai_text
-    seeds = YAML.load_file "./seeds.yml"
-    "帰りたい" + generate_text(seeds[:nyan]) + generate_text(seeds[:postfix])
+    seeds = YAML.load_file "./config/seeds.yml"
+    seeds.keys.inject("") {|text, key| text + generate_text(seeds[key])}
   end
 
   def generate_text(seed)

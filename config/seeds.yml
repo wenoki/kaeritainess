@@ -1,3 +1,14 @@
+:kaeritai:
+  - :weight: 100
+    :pattern: "帰りたい"
+  - :weight: 13
+    :pattern: "かえりたい"
+  - :weight: 5
+    :pattern: "帰宅したい"
+  - :weight: 3
+    :pattern: "きゃえりたい"
+  - :weight: 2
+    :pattern: "我熱烈的帰宅希求"
 :nyan:
   - :weight: 100
     :pattern: "にゃん"
