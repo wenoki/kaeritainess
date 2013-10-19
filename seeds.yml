@@ -45,6 +45,8 @@
   - :weight: 5
     :pattern: "！{1,40}"
   - :weight: 5
+    :pattern: "⤵︎"
+  - :weight: 5
     :pattern: "(！|？){1,10}"
   - :weight: 3
     :pattern: "(！|？){1,50}"
@@ -52,4 +54,3 @@
     :pattern: "…{1,10}"
   - :weight: 3
     :pattern: "♡"
-

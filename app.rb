@@ -81,6 +81,9 @@ class Fixnum
 end
 
 class Kaeritainess < Sinatra::Base
+  log = Logger.new STDOUT
+  STDOUT.sync = true
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -128,6 +131,7 @@ class Kaeritainess < Sinatra::Base
     if tweet
       @kaeritai.tweet_id = tweet.id
       @kaeritai.save
+      log.info "@#{current_user_nickname} just created a kaeritai ##{@kaeritai.serial}."
       redirect to "/kaeritai/" + @kaeritai.serial.to_s
     else
       redirect to "/failure"
