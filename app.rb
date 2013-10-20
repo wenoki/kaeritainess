@@ -29,7 +29,12 @@ class Kaeritai
   default_scope desc(:created_at)
 
   def tweet
-    client.update "#{self.text} (#{self.serial.with_delimiter}回目)"
+    case rand(3)
+    when 0
+      client.update_with_media "#{self.text} (#{self.serial.with_delimiter}回目)", File.new(Dir.glob("./media/*").sample)
+    else
+      client.update "#{self.text} (#{self.serial.with_delimiter}回目)"
+    end
   end
 
   def initialize(attrs = nil)
@@ -51,7 +56,7 @@ class Kaeritai
 
   def kaeritai_text
     seeds = YAML.load_file "./config/seeds.yml"
-    seeds.keys.inject("") {|text, key| text + generate_text(seeds[key])}
+    seeds.values.inject("") {|text, seed| text + generate_text(seed)}
   end
 
   def generate_text(seed)
@@ -60,7 +65,7 @@ class Kaeritai
       sum + item[:weight]
     end
 
-    dice = rand(sum)
+    dice = rand sum
 
     seed.each do |item|
       if item[:range].include? dice
