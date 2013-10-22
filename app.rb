@@ -56,7 +56,7 @@ class Kaeritai
 
   def kaeritai_text
     seeds = YAML.load_file "./config/seeds.yml"
-    seeds.values.inject "" {|text, seed| text + generate_text(seed)}
+    seeds.values.inject("") {|text, seed| text + generate_text(seed)}
   end
 
   def generate_text seed
