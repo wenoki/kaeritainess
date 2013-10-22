@@ -19,7 +19,7 @@ html
           background:
             color: $lightgreen
             image: url("/1_top.png")
-            size: 380px
+            size: 380px auto
             repeat: no-repeat
             position: 100px bottom
           color: white
@@ -35,7 +35,7 @@ html
           background:
             color: $red
             image: url("/1_bottom.png")
-            size: 380px
+            size: 380px auto
             repeat: no-repeat
             position: 100px top
           text-align: right
@@ -103,12 +103,23 @@ html
             - else
               a href= "/signin"
                 | Twitterでログイン
-            | して、「帰りたい」ボタンを押すと
+            | して、
+            span.label.label-success
+              span.glyphicon.glyphicon-home
+              |  帰りたい
+            | ボタンを押すと
             a href= "https://twitter.com/kaeritainess"
               | 帰りたいにゃん
             | があなたの代わりにその想いをつぶやきます。
           p
             | それだけです！
+          h2
+            | イラスト募集
+          p
+            | 帰りたいにゃんのツイートに付けるイラストを募集中です。
+            a href= "https://twitter.com/kaeritainess"
+              | @kaeritainess
+            | 宛てにリプライで送ってください！
         #recent.col-lg-4
           h2
             | 最近の

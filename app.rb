@@ -29,7 +29,7 @@ class Kaeritai
   default_scope desc(:created_at)
 
   def tweet
-    case rand(3)
+    case rand(15)
     when 0
       client.update_with_media "#{self.text} (#{self.serial.with_delimiter}回目)", File.new(Dir.glob("./media/*").sample)
     else
@@ -37,7 +37,7 @@ class Kaeritai
     end
   end
 
-  def initialize(attrs = nil)
+  def initialize attrs = nil
     super
     self.serial = self.class.count + 1
     self.user_id = attrs[:user_id]
@@ -56,11 +56,11 @@ class Kaeritai
 
   def kaeritai_text
     seeds = YAML.load_file "./config/seeds.yml"
-    seeds.values.inject("") {|text, seed| text + generate_text(seed)}
+    seeds.values.inject "" {|text, seed| text + generate_text(seed)}
   end
 
-  def generate_text(seed)
-    sum = seed.inject(0) do |sum, item|
+  def generate_text seed
+    sum = seed.inject 0 do |sum, item|
       item[:range] = sum...(sum + item[:weight])
       sum + item[:weight]
     end
@@ -68,12 +68,12 @@ class Kaeritai
     dice = rand sum
 
     seed.each do |item|
-      if item[:range].include? dice
-        if item[:pattern].empty?
-          return ""
-        else
-          return Regexp.compile(item[:pattern]).generate
-        end
+      next unless item[:range].include? dice
+
+      if item[:pattern].empty?
+        return ""
+      else
+        return Regexp.compile(item[:pattern]).generate
       end
     end
   end

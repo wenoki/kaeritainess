@@ -24,14 +24,16 @@
     :pattern: "にゃ〜{1,30}ん?"
   - :weight: 20
     :pattern: "ニャン?"
-  - :weight: 5
+  - :weight: 7
     :pattern: "ニャー{1,5}ン?"
-  - :weight: 5
+  - :weight: 7
     :pattern: "ニャ〜{1,5}ン?"
   - :weight: 2
     :pattern: "ニャー{1,30}ン?"
   - :weight: 2
     :pattern: "ニャ〜{1,30}ン?"
+  - :weight: 7
+    :pattern: "(にゃう)"
   - :weight: 10
     :pattern: "ん?ですが?"
   - :weight: 8
@@ -65,3 +67,11 @@
     :pattern: "…{1,10}"
   - :weight: 3
     :pattern: "♡"
+  - :weight: 3
+    :pattern: "☆"
+  - :weight: 2
+    :pattern: "♪"
+  - :weight: 2
+    :pattern: "♫"
+  - :weight: 2
+    :pattern: "♬"
