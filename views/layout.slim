@@ -4,6 +4,21 @@ html
     meta charset= "utf-8"
     title
       | 帰りたいにゃん
+    meta name= "description" content= "帰りたい人による帰りたい人のための帰りたいWebサービス"
+    meta itemprop= "name" content= "帰りたいにゃん"
+    meta itemprop= "description" content= "帰りたい人による帰りたい人のための帰りたいWebサービス"
+    meta property= "og:title" content= "帰りたいにゃん"
+    meta property= "og:description" content= "帰りたい人による帰りたい人のための帰りたいWebサービス"
+    meta property= "og:type" content= "website"
+    meta property= "og:url" content= request.url
+    meta property= "og:email" content= "i@dec31.net"
+    meta property= "og:image" content= "/1.png"
+    meta property= "twitter:card" content= "summary"
+    meta property= "twitter:title" content= "帰りたいにゃん"
+    meta property= "twitter:description" content= "帰りたい人による帰りたい人のための帰りたいWebサービス"
+    meta property= "twitter:site" content= "@kaeritainess"
+    meta property= "twitter:creator" content= "@kaeritainess"
+    meta property= "twitter:image" content= "/1.png"
     script src= "http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
     script src= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
     link rel= "stylesheet" href= "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
@@ -111,15 +126,20 @@ html
             a href= "https://twitter.com/kaeritainess"
               | 帰りたいにゃん
             | があなたの代わりにその想いをつぶやきます。
-          p
-            | それだけです！
           h2
             | イラスト募集
           p
-            | 帰りたいにゃんのツイートに付けるイラストを募集中です。
+            | 帰りたいにゃんのイラストを募集中です。
             a href= "https://twitter.com/kaeritainess"
               | @kaeritainess
             | 宛てにリプライで送ってください！
+          h6
+            | 提供感謝（敬称略）
+          ul
+            - Media.authors.each do |author|
+              li
+                a href= "https://twitter.com/#{author}"
+                 = "@" + author
         #recent.col-lg-4
           h2
             | 最近の
