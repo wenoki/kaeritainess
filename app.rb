@@ -31,9 +31,9 @@ class Kaeritai
   def tweet
     case rand(15)
     when 0
-      client.update_with_media "#{self.text} (#{self.serial.with_delimiter}回目)", File.new(Dir.glob("./media/*").sample)
+      client.update_with_media tweet_text, Media.all.sample
     else
-      client.update "#{self.text} (#{self.serial.with_delimiter}回目)"
+      client.update tweet_text
     end
   end
 
@@ -52,6 +52,10 @@ class Kaeritai
       oauth_token: ENV["CLIENT_ACCESS_TOKEN"],
       oauth_token_secret: ENV["CLIENT_ACCESS_TOKEN_SECRET"],
     )
+  end
+
+  def tweet_text
+    "#{self.text} (#{self.serial.with_delimiter}回目)"
   end
 
   def kaeritai_text
@@ -76,6 +80,20 @@ class Kaeritai
         return Regexp.compile(item[:pattern]).generate
       end
     end
+  end
+end
+
+class Media
+  def self.glob
+    Dir.glob "./media/*"
+  end
+
+  def self.all
+    self.glob.map {|item| File.new item}
+  end
+
+  def self.authors
+    self.glob.map {|item| item.match(/\.\/media\/\d+-(\w+)/)[1]}.uniq
   end
 end
 
@@ -115,6 +133,10 @@ class Kaeritainess < Sinatra::Base
     end
   end
 
+  error do
+    slim :failure
+  end
+
   get "/" do
     slim :index
   end
@@ -144,12 +166,8 @@ class Kaeritainess < Sinatra::Base
   end
 
   get "/kaeritai/:serial" do
-    begin
-      @kaeritai = Kaeritai.find_by serial: params[:serial]
-      slim :show
-    rescue
-      redirect to "/failure"
-    end
+    @kaeritai = Kaeritai.find_by serial: params[:serial]
+    slim :show
   end
 
   get "/auth/twitter/callback" do
@@ -157,13 +175,5 @@ class Kaeritainess < Sinatra::Base
     session[:current_user_id] = auth["uid"]
     session[:current_user_nickname] = auth["info"]["nickname"]
     redirect to "/"
-  end
-
-  get "/auth/failure" do
-    redirect to "/failure"
-  end
-
-  get "/failure" do
-    slim :failure
   end
 end
