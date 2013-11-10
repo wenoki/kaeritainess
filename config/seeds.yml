@@ -5,8 +5,6 @@
     :pattern: "かえりたい"
   - :weight: 5
     :pattern: "帰宅したい"
-  - :weight: 3
-    :pattern: "きゃえりたい"
   - :weight: 2
     :pattern: "我熱烈的帰宅希求"
 :nyan:
@@ -38,6 +36,8 @@
     :pattern: "ん?ですが?"
   - :weight: 8
     :pattern: "(よ|ょ)(う|ぅ|お|ぉ)"
+  - :weight: 5
+    :pattern: "にゃんぱす"
   - :weight: 5
     :pattern: ""
 :postfix:
